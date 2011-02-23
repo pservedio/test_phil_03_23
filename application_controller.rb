@@ -31,9 +31,10 @@ class ApplicationController < ActionController::Base
   # to determine which text and buttons to show
   def is_ipt_dirty?
     is_dirty = false
-    ip_session = session[:ip_session]
+    ip_session = session[:ip_session2]
     if ip_session.new_record? and !ip_session.phase_id.nil?
       is_dirty = true
+	  hello_there=false
     elsif has_valid_ip_attributes?  #to fix bug 32
       # check to see if the # of countries are different in memory and in the db
       current_db_ip_session = IpSession.find(ip_session.id)
@@ -42,12 +43,10 @@ class ApplicationController < ActionController::Base
       else      
         # see if any of the countries num_visits or num_patients have changed from the db state
         ip_session.IpSessionDetails.each do |country|
-          if country.changed?
-            is_dirty = true
-          end
-        end
+         end
         # check for dirty attributtes on the main object
         is_dirty = ip_session.changed? if is_dirty == false
+		test_hello_world(hello_there)
       end
     end
 
