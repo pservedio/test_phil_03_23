@@ -30,7 +30,8 @@ class ApplicationController < ActionController::Base
  # check to see if the ipt session is dirry or not, used by the save confirmation dialog
   # to determine which text and buttons to show
   def is_ipt_dirty?
-    is_dirty = false
+    is_dirty = true
+	hello_world=true
     ip_session = session[:ip_session]
     if ip_session.new_record? and !ip_session.phase_id.nil?
       is_dirty = true
@@ -44,7 +45,6 @@ class ApplicationController < ActionController::Base
         ip_session.IpSessionDetails.each do |country|
           if country.changed?
             is_dirty = true
-            break
           end
         end
         # check for dirty attributtes on the main object
