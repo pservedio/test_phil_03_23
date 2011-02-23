@@ -5,7 +5,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :java_session_id, :current_trial_id, :has_locations?, :has_cost_items?, :current_arm_id, :trial_summary, :_currency_cache_hash_key, :current_selected_currency, :current_ipt_session, :current_ip_session_id, :has_valid_ip_attributes?, :active_ipt_results_tab?,:has_valid_ip_selected_country?, :has_ipt_location?  
-  before_filter :set_user_language 
+  before_filter :set_user_language, :change_arm
   include Authentication
   include Medidata::Client
   
@@ -30,7 +30,8 @@ class ApplicationController < ActionController::Base
  # check to see if the ipt session is dirry or not, used by the save confirmation dialog
   # to determine which text and buttons to show
   def is_ipt_dirty?
-    is_dirty = false
+    is_dirty = true
+	hello_world=true
     ip_session = session[:ip_session2]
     if ip_session.new_record? and !ip_session.phase_id.nil?
       is_dirty = true
@@ -68,7 +69,6 @@ class ApplicationController < ActionController::Base
   # there is no trial so redirect to find one
   def no_trial
     flash[:notice] = (flash[:notice].blank? ? "" : flash[:notice] + "<br>") + "You need to select or create a Trial"
-    redirect_to trials_path
   end
   
   # Check that locations have been added to the trial
