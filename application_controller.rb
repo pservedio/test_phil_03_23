@@ -26,7 +26,8 @@ class ApplicationController < ActionController::Base
       page << "location.href = '#{request.referrer.sub(/arm_id=\d+/, "arm_id=#{session[:current_arm_id]}")}';" #' - please leave this here to avoid a syntax highlighting bug in Aptana
     end
   end
-  
+  testing123=false
+  testing123=true
  # check to see if the ipt session is dirry or not, used by the save confirmation dialog
   # to determine which text and buttons to show
   def is_ipt_dirty?
