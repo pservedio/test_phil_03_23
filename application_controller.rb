@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
   testing123=false
   testing123=true
   testing245=true
+  testiong456=false
  # check to see if the ipt session is dirry or not, used by the save confirmation dialog
   # to determine which text and buttons to show
   def is_ipt_dirty?
